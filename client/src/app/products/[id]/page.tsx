@@ -129,7 +129,10 @@ export const generateMetadata = async ({ params }: { params: { id: string } }) =
   };
 };
 
-const ProductPage = ({ params, searchParams, }: { params: { id: string }; searchParams: { color?: string; size?: string }; }) => {
+const ProductPage = async ({
+  params,
+  searchParams,
+}: any) => {
   const product = products.find((p) => p.id === Number(params.id));
   if (!product) return <div>Produk tidak ditemukan</div>;
 
