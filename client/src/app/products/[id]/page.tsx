@@ -2,7 +2,7 @@ import { ProductsType } from "@/types";
 import Image from "next/image";
 
 // TEMPORARY
-const products: ProductsType = [
+ const products: ProductsType = [
   {
     id: 1,
     name: "Tas dan Dompet Anyaman",
@@ -129,19 +129,12 @@ export const generateMetadata = async ({ params }: { params: { id: string } }) =
   };
 };
 
-interface ProductPageProps {
-  params: { id: string };
-  searchParams?: { color?: string; size?: string };
-}
-
-const ProductPage = async ({ params, searchParams }: ProductPageProps) => {
-  const { id } = params;
-
-  const product = products.find((p) => p.id === Number(id));
+const ProductPage = ({ params, searchParams, }: { params: { id: string }; searchParams: { color?: string; size?: string }; }) => {
+  const product = products.find((p) => p.id === Number(params.id));
   if (!product) return <div>Produk tidak ditemukan</div>;
 
-  const selectedSize = searchParams?.size || product.sizes[0];
-  const selectedColor = searchParams?.color || product.colors[0];
+  const selectedSize = searchParams.size || product.sizes[0];
+  const selectedColor = searchParams.color || product.colors[0];
   return (
     <div className="flex flex-col gap-4 lg:flex-row md:gap-12 mt-12">
       {/* IMAGE */}
@@ -163,7 +156,7 @@ const ProductPage = async ({ params, searchParams }: ProductPageProps) => {
           selectedSize={selectedSize}
           selectedColor={selectedColor}
         /> */}
-        {/* CARD INFO */}
+       {/* CARD INFO */}
         {/* <div className="flex items-center gap-2 mt-4">
           <Image
             src="/klarna.png"
